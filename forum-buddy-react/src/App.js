@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-let defaultTextColor = 'green'
+let defaultTextColor = 'green';
 let defaultStyle = {
   color: defaultTextColor
 };
-
 
 class Aggregate extends Component {
   render() {
@@ -22,9 +21,9 @@ class Filter extends Component {
   render() {
     return (
       <div style={defaultStyle}>
-        <img/>
-        <input type="text"/>
-          Filter
+        <img />
+        <input type="text" />
+        Filter
       </div>
     );
   }
@@ -32,8 +31,8 @@ class Filter extends Component {
 
 class Playlist extends Component {
   render() {
-    return(
-      <div style={{...defaultStyle, width: '25%'}}>
+    return (
+      <div style={{ ...defaultStyle, width: '25%' }}>
         <img />
         <h3> Playlist Name</h3>
         <ul>
@@ -50,10 +49,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Title</h1>
-        <Aggregate/>
-        <Aggregate/>
-        <Filter/>
-        <Playlist/>
+        <Aggregate />
+        <Aggregate />
+        <Filter />
+        <Playlist />
       </div>
     );
   }
