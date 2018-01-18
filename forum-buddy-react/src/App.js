@@ -2,17 +2,58 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+let defaultTextColor = 'green'
+let defaultStyle = {
+  color: defaultTextColor
+};
+
+
+class Aggregate extends Component {
+  render() {
+    return (
+      <div className="aggregate">
+        <h2 style={defaultStyle}>Number and Text</h2>
+      </div>
+    );
+  }
+}
+
+class Filter extends Component {
+  render() {
+    return (
+      <div style={defaultStyle}>
+        <img/>
+        <input type="text"/>
+          Filter
+      </div>
+    );
+  }
+}
+
+class Playlist extends Component {
+  render() {
+    return(
+      <div style={{...defaultStyle, width: '25%'}}>
+        <img />
+        <h3> Playlist Name</h3>
+        <ul>
+          <li>Song1</li>
+          <li>Song2</li>
+        </ul>
+      </div>
+    );
+  }
+}
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Title</h1>
+        <Aggregate/>
+        <Aggregate/>
+        <Filter/>
+        <Playlist/>
       </div>
     );
   }
