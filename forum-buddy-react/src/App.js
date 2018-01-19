@@ -71,7 +71,7 @@ class Filter extends Component {
     return (
       <div style={defaultStyle}>
         <img />
-        <input type="text" />
+        <input type="text" onKeyUp={event => this.props.onChangeText(event.target.value)}/>
         Filter
       </div>
     );
@@ -97,7 +97,10 @@ class Playlist extends Component {
 class App extends Component {
   constructor() {
     super();
-    this.state = { serverData: {} };
+    this.state = {
+      serverData: {},
+      filterString: ''
+   };
   }
   componentDidMount() {
     this.setState({
@@ -105,6 +108,11 @@ class App extends Component {
     });
   }
   render() {
+    let playlistsToRender = this.state.serverData.user ? this.state.serverData.user.playlists.filter(playlist =>
+      playlist.name.toLowerCase().includes(
+        this.state.filterString.toLowerCase()
+      )
+    ) : []
     return (
       <div className="App">
         {this.state.serverData.user &&
@@ -112,10 +120,12 @@ class App extends Component {
             <h1 style={{ ...defaultStyle }}>
               {this.state.serverData.user.name}
             </h1>
-            <PlaylistCounter playlists={this.state.serverData.user && this.state.serverData.user.playlists} />
-            <HoursCounter playlists={this.state.serverData.user && this.state.serverData.user.playlists} />
-            <Filter />
-            {this.state.serverData.user.playlists.map((playlist, index) =>
+            <PlaylistCounter playlists={this.state.serverData.user && playlistsToRender} />
+            <HoursCounter playlists={this.state.serverData.user && playlistsToRender} />
+            <Filter filterString={this.state.filterString} onChangeText={text => this.setState({filterString: text})}/>
+            {playlistsToRender.filter(playlist =>
+              playlist.name.toLowerCase().includes(this.state.filterString.toLowerCase())
+            ).map((playlist, index) =>
               <Playlist key={index} playlist={playlist} />
             )}
           </div>
